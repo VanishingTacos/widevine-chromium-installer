@@ -1,0 +1,23 @@
+services:
+  nvidia-devel:
+    build: .
+    container_name: nvidia-devel
+    hostname: nvidia-devel
+    restart: unless-stopped
+    # tty: true
+    environment:
+      - TZ=Asia/Kolkata
+      - TS_AUTHKEY=tskey-auth-kbB8U9tSsF11CNTRL-quEfvF7dRqVuagVLhwuTrVt3SDhzKgA5
+    volumes:
+      - ./ml-workspace:/workspace
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities:
+                - gpu
+
+volumes:
+  ml-workspace:
